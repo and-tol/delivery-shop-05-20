@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import {ShoppingCartOutlined} from '@ant-design/icons';
-import image from '../../data/img/pizza-burger/pizza-dacha.jpg';
+import image from '../../../../data/img/pizza-burger/pizza-dacha.jpg';
 
 import { Card, Button } from 'antd';
 const { Meta } = Card;
 
 export const Product = (props) => {
-  const { id, name, description, price, imageA } = props.item;
+  const {name, description, price } = props.item;
 
   const [isFlipped, changeFlipped] = useState(false);
 
