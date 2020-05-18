@@ -1,31 +1,58 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import ReactCardFlip from 'react-card-flip';
+import {ShoppingCartOutlined} from '@ant-design/icons';
 import image from '../../data/img/pizza-burger/pizza-dacha.jpg';
 
 import { Card, Button } from 'antd';
 const { Meta } = Card;
 
 export const Product = (props) => {
-  const { id, name, description, price, imageA } = props.data[0];
+  const { id, name, description, price, imageA } = props.item;
 
-  // let title = name
-  const [title, changeTitle] = useState(name)
+  const [isFlipped, changeFlipped] = useState(false);
 
   const clickProductCard = () => {
-    // title = 'Clicked';
-    changeTitle('Clicked');
-    console.log('click Card')
-  }
+    changeFlipped(!isFlipped);
+  };
 
   return (
-    <Card key={id} hoverable style={{ width: 280 }} cover={<img alt={name} src={image} />} onClick={clickProductCard}>
-      <Meta title={title} description={description} />
-      <div>
-        <Button>
-          <span>В корзину</span>
-          <span className='button-cart-svg'></span>
-        </Button>
-        <strong>{price} ₽</strong>
-      </div>
-    </Card>
+    <div style={{ width: 280}}>
+      <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
+        <Card
+          hoverable
+          style={{ width: 280, minHeight: 418 }}
+          cover={<img alt={name} src={image} />}
+          onClick={clickProductCard}>
+          <Meta title={name} />
+          <div>
+            <Button icon={<ShoppingCartOutlined />} size={'small'}>
+              <span>В корзину</span>
+              {/* <span className='button-cart-svg'></span> */}
+            </Button>
+
+            <p>
+              Стоимость: <strong>{price} ₽</strong>
+            </p>
+          </div>
+        </Card>
+
+        <Card
+          hoverable
+          style={{ width: 280, minHeight: 418 }}
+          cover={<img alt={name} src={image} />}
+          onClick={clickProductCard}>
+          <Meta title='Описание' description={description} />
+          <div>
+            <Button icon={<ShoppingCartOutlined />} size={'small'}>
+              <span>В корзину</span>
+              {/* <span className='button-cart-svg'></span> */}
+            </Button>
+            <p>
+              Стоимость: <strong>{price} ₽</strong>
+            </p>
+          </div>
+        </Card>
+      </ReactCardFlip>
+    </div>
   );
 };

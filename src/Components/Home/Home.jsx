@@ -5,7 +5,6 @@ import { Layout } from 'antd';
 import styles from './Home.module.css';
 const { Header, Footer, Sider, Content } = Layout;
 
-
 const data = [
   {
     id: 'pb01',
@@ -15,11 +14,20 @@ const data = [
     image: './../../data/img/pizza-burger/pizza-dacha.jpg',
     // image: 'img/pizza-burger/pizza-dacha.jpg',
   },
+
+  {
+    id: 'pb02',
+    name: 'Пицца Мясное ассорти',
+    description: 'Сыр моцарелла, фирменный соус, помидоры, куриная грудка, бекон, свинина, говядина, зелень',
+    price: 693,
+    // image: 'img/pizza-burger/pizza-meat.jpg',
+  },
 ];
 
 export const Home = () => {
 
-  const clickProduct = () => {};
+  const renderCardsProducts = () => data.map(card => <Product key={card.id} item={card} />);
+
 
   return (
     <Layout>
@@ -28,11 +36,10 @@ export const Home = () => {
         <Sider>Sider</Sider>
         <Content>
           <h2> Content</h2>
-
-          <Product data={data} />
+          {renderCardsProducts()}
         </Content>
       </Layout>
       <Footer>Footer</Footer>
     </Layout>
   );
-}
+};
