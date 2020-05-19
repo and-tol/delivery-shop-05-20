@@ -1,30 +1,41 @@
 import React from 'react';
+import { BasketItem } from './BasketItem/BasketItem';
+
+const inBasket = [
+  {
+    id: 'pb01',
+    name: 'Пицца от Шеф-повара',
+    description: 'Сыр моцарелла, помидоры, салями, бекон, сыр пармезан, зелень, ветчина',
+    price: 638,
+    image: 'img/pizza-burger/pizza-dacha.jpg',
+  },
+  {
+    id: 'pb02',
+    name: 'Пицца Мясное ассорти',
+    description: 'Сыр моцарелла, фирменный соус, помидоры, куриная грудка, бекон, свинина, говядина, зелень',
+    price: 693,
+    image: 'img/pizza-burger/pizza-meat.jpg',
+  },
+  {
+    id: 'pp01',
+    name: 'Пицца Везувий',
+    description: 'Соус томатный, сыр «Моцарелла», ветчина, пепперони, перец «Халапенье», соус «Тобаско», томаты.',
+    price: 545,
+    image: 'img/pizza-plus/pizza-vesuvius.jpg',
+  },
+  {
+    id: 'pp02',
+    name: 'Пицца Девичник',
+    description:
+      'Соус томатный, постное тесто, нежирный сыр, кукуруза, лук, маслины, грибы, помидоры, болгарский перец.',
+    price: 450,
+    image: 'img/pizza-plus/pizza-girls.jpg',
+  },
+];
 
 export const Basket = () => {
-  return (
-    <section className='container mx-auto p-2 bg-gray-200'>
-      <div className='flex items-center bg-gray-200 bg-gray-400 px-4 py-2'>
-        <span className='mr-8 my-4'>Пицца Чиз</span>
-        <strong className='mr-8 my-4'>500 ₽</strong>
-        <div className='my-4'>
-          <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
-            -
-          </button>
-          <span className='px-6'>2</span>
-          <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
-            +
-          </button>
-        </div>
-      </div>
-      <div className='food-row'>
-        <span className='food-name'>Пицца Пеперони</span>
-        <strong className='food-price'>500 ₽</strong>
-        <div className='food-counter'>
-          <button className='counter-button counter-minus'>-</button>
-          <span className='counter'>1</span>
-          <button className='counter-button counter-plus'>+</button>
-        </div>
-      </div>
-    </section>
-  );
+  const renderBasket = () => inBasket
+    .map((product) => <BasketItem key={product.id} item={product} />);
+
+  return <section className='container mx-auto p-2 bg-gray-200'>{renderBasket()}</section>;
 };

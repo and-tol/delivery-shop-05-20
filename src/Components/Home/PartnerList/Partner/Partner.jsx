@@ -1,4 +1,4 @@
-import React from 'react';npm cache clean --force
+import React from 'react';
 
 export const Partner = (props) => {
   const { name, time_of_delivery: timeOfDelivery, stars, price, kitchen, image, products } = props.item;
