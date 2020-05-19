@@ -8,7 +8,9 @@ export const BasketItem = (props) => {
   const [count, setCount] = useState(0);
 
   const removeCount = () => {
-    setCount(count - 1);
+    if (count) {
+      setCount(count - 1);
+    }
   };
   const addCount = () => {
     setCount(count + 1);
