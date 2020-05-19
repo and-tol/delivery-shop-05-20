@@ -1,17 +1,6 @@
-import React from 'react';
+import React from 'react';npm cache clean --force
 
 export const Partner = (props) => {
-  console.log('props', props)
-  const p = {
-    name: 'Пицца Плюс',
-    time_of_delivery: 50,
-    stars: 4.5,
-    price: 900,
-    kitchen: 'Пицца',
-    image: 'img/pizza-plus/preview.jpg',
-    // products: 'pizza-plus.json',
-  }
-
   const { name, time_of_delivery: timeOfDelivery, stars, price, kitchen, image, products } = props.item;
 
   return (
