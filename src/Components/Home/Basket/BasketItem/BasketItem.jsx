@@ -52,7 +52,7 @@ export const BasketItem = (props) => {
           onClick={() => {
             addCount();
             allPriceOfPosition();
-            console.log(currentCount);
+
             props.updateData(price, currentCount);
           }}>
           +

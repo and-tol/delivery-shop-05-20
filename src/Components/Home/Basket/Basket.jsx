@@ -48,6 +48,29 @@ export const Basket = () => {
   };
 
   /**
+   * Функция увеличивает в корзине количество товара конкретной позиции
+   * The function increases the quantity of the product in the basket
+   * @param {string} id - ID конкретного продукта в корзине
+   */
+  const increaseQuantity = (id) => {
+    const indx = inBasket.inBasketState.findIndex((el) => el.id === id);
+    const prevQuantity = inBasket.inBasketState[indx].quantity;
+
+    const currentProduct = {
+      id: id,
+      quantity: prevQuantity + 1,
+    };
+
+    const newInBasketState = [
+      ...inBasket.inBasketState.slice(0, indx),
+      currentProduct,
+      ...inBasket.inBasketState.slice(indx + 1),
+    ];
+  };
+
+  console.log('increaseQuantity', increaseQuantity('pb01'));
+
+  /**
    * Функция по id товара находит его стоимость и количество в корзине, и вычисляет общую стоимость конкретного товара
    * The function by id of the product finds its value and quantity in the basket, and calculates the total cost of a particular product
    * @param {number} id  -  товара
@@ -63,6 +86,14 @@ export const Basket = () => {
   };
   console.log(totalPositionCost('pb01'));
 
+  /**
+   * Функция считает общее количество товара в корзине
+   * The function calculates the total quantity of goods in the basket.
+   */
+  const totalProductsQuantity = () => {
+    return inBasket.inBasketState.reduce((acc, cur) => acc + cur.quantity, 0);
+  };
+
   const renderBasket = () =>
     inBasket.inBasketProducts.map((product) => {
       return (
@@ -75,7 +106,7 @@ export const Basket = () => {
       <section className='container w-2/3 mx-auto p-2 bg-gray-200'>{renderBasket()}</section>
       <section className='container w-1/3 p-2'>
         <div className='container w-full h-full border border-gray-400 p-4'>
-          <p className='font-medium mb-4'>Всего товаров: {inBasket.inBasketState.length}</p>
+          <p className='font-medium mb-4'>Всего товаров: {totalProductsQuantity()}</p>
           <p className='font-bold'>Товары на сумму: </p>
         </div>
       </section>
