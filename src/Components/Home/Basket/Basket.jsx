@@ -66,9 +66,12 @@ export const Basket = () => {
       currentProduct,
       ...inBasket.inBasketState.slice(indx + 1),
     ];
-  };
 
-  console.log('increaseQuantity', increaseQuantity('pb01'));
+    inBasket.inBasketState = newInBasketState;
+    inBasket.inBasketProducts = [...inBasket.inBasketProducts];
+
+    console.log('inBasket', inBasket);
+  };
 
   /**
    * Функция по id товара находит его стоимость и количество в корзине, и вычисляет общую стоимость конкретного товара
