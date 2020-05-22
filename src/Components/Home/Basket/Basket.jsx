@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BasketItem } from './BasketItem/BasketItem';
 
 const inBasket = {
@@ -100,23 +100,22 @@ export const Basket = () => {
     return inBasket.inBasketState.reduce((acc, cur) => acc + cur.quantity, 0);
   };
 
+  /**
+   * Первоначальное общее количество товаров
+   */
   let productsQuantity = totalProductsQuantity();
 
-  // * ----------- * //
-
-  // const [productsQuantity = totalProductsQuantity, setstate] = useState(totalProductsQuantity());
-
-  // const changeProductsQuantity = () => {
-  //   // totalProductsQuantity();
-  //   console.log('useState>>>', productsQuantity);
-  //   setstate(productsQuantity);
-  // };
-
-  // useEffect(() => {
-  //   totalProductsQuantity();
-  //   console.log('inBasket-useEffect2>>>>', productsQuantity);
-  // });
-  // * ----------- * //
+  // * ================ * //
+  // Отслеживает изменения в общем количестве товаров
+  const [basket, setBasket] = useState(productsQuantity);
+  /**
+   * Изменяет общее количество товаров
+   */
+  const changeTotalQuantity = () => {
+    productsQuantity = totalProductsQuantity();
+    setBasket(productsQuantity);
+  };
+  // * --------------- * //
 
   const renderBasket = () =>
     inBasket.inBasketProducts.map((product) => {
@@ -124,9 +123,9 @@ export const Basket = () => {
         <BasketItem
           key={product.id}
           item={product}
-          increaseQuantity={increaseQuantity}
           inBasketState={inBasket.inBasketState}
-          totalProductsQuantity={totalProductsQuantity}
+          increaseQuantity={increaseQuantity}
+          changeProductsQuantity={changeTotalQuantity}
         />
       );
     });
@@ -137,7 +136,6 @@ export const Basket = () => {
       <section className='container w-1/3 p-2'>
         <div className='container w-full h-full border border-gray-400 p-4'>
           <p className='font-medium mb-4'>Всего товаров: {productsQuantity}</p>
-          {/* <p className='font-medium mb-4'>Всего товаров: {changeProductsQuantity}</p> */}
           <p className='font-bold'>Товары на сумму: </p>
         </div>
       </section>

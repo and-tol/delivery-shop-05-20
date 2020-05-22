@@ -1,35 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 /**
  * Товар в корзине, его цена и количество
  */
 export const BasketItem = (props) => {
+  const inBasketState = props.inBasketState;
   const { name, price, image, id } = props.item;
   const increase = props.increaseQuantity;
-  const inBasketState = props.inBasketState;
-  // const totalProductsQuantity = props.totalProductsQuantity;
   const changeProductsQuantity = props.changeProductsQuantity;
 
-  const count = 1;
+  const count = inBasketState.find(el => el.id === id).quantity
+  console.log('count>>>>', count);
 
   // изменяется количество товаров
   const [currentCount, setCount] = useState(count);
-
   const removeCount = () => {
-    if (currentCount) {
+    if (currentCount > 1) {
       setCount(currentCount - 1);
     }
   };
-  const addCount = () => setCount(currentCount + 1);
+  const addCount = () => {
+    console.log('currentCount>>>  ', currentCount);
+    setCount(currentCount + 1)
+  };
 
   // Изменяется сумма за одну позицию
   const [sumItem, setSum] = useState(price);
-
   const allPriceOfPosition = () => {
     setSum(price * currentCount);
   };
-
-
 
   return (
     <div className='flex justify-between items-center bg-gray-400 px-4 py-0 mb-1'>
@@ -54,7 +53,6 @@ export const BasketItem = (props) => {
           onClick={() => {
             addCount();
             allPriceOfPosition();
-            // totalProductsQuantity(id, inBasketState);
             changeProductsQuantity();
 
             increase(id);
