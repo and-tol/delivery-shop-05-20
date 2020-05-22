@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BasketItem } from './BasketItem/BasketItem';
 
 const inBasket = {
@@ -6,7 +6,7 @@ const inBasket = {
     { id: 'pp02', quantity: 1 },
     { id: 'pp01', quantity: 1 },
     { id: 'pb02', quantity: 1 },
-    { id: 'pb01', quantity: 3 },
+    { id: 'pb01', quantity: 1 },
   ],
 
   inBasketProducts: [
@@ -43,10 +43,6 @@ const inBasket = {
 };
 
 export const Basket = () => {
-  const updateData = (price, count) => {
-    let a = price * count;
-  };
-
   /**
    * Функция увеличивает в корзине количество товара конкретной позиции
    * The function increases the quantity of the product in the basket
@@ -71,6 +67,11 @@ export const Basket = () => {
     inBasket.inBasketProducts = [...inBasket.inBasketProducts];
 
     console.log('inBasket', inBasket);
+
+    return {
+      inBasketState: newInBasketState,
+      inBasketProducts: [...inBasket.inBasketProducts],
+    };
   };
 
   /**
@@ -87,20 +88,46 @@ export const Basket = () => {
 
     return positionQuantity * positionPrice;
   };
-  console.log(totalPositionCost('pb01'));
+  // console.log(totalPositionCost('pb01'));
 
   /**
    * Функция считает общее количество товара в корзине
    * The function calculates the total quantity of goods in the basket.
    */
   const totalProductsQuantity = () => {
+    console.log('inBasket2>>> ', inBasket);
+
     return inBasket.inBasketState.reduce((acc, cur) => acc + cur.quantity, 0);
   };
+
+  let productsQuantity = totalProductsQuantity();
+
+  // * ----------- * //
+
+  // const [productsQuantity = totalProductsQuantity, setstate] = useState(totalProductsQuantity());
+
+  // const changeProductsQuantity = () => {
+  //   // totalProductsQuantity();
+  //   console.log('useState>>>', productsQuantity);
+  //   setstate(productsQuantity);
+  // };
+
+  // useEffect(() => {
+  //   totalProductsQuantity();
+  //   console.log('inBasket-useEffect2>>>>', productsQuantity);
+  // });
+  // * ----------- * //
 
   const renderBasket = () =>
     inBasket.inBasketProducts.map((product) => {
       return (
-        <BasketItem key={product.id} item={product} updateData={updateData} inBasketState={inBasket.inBasketState} />
+        <BasketItem
+          key={product.id}
+          item={product}
+          increaseQuantity={increaseQuantity}
+          inBasketState={inBasket.inBasketState}
+          totalProductsQuantity={totalProductsQuantity}
+        />
       );
     });
 
@@ -109,7 +136,8 @@ export const Basket = () => {
       <section className='container w-2/3 mx-auto p-2 bg-gray-200'>{renderBasket()}</section>
       <section className='container w-1/3 p-2'>
         <div className='container w-full h-full border border-gray-400 p-4'>
-          <p className='font-medium mb-4'>Всего товаров: {totalProductsQuantity()}</p>
+          <p className='font-medium mb-4'>Всего товаров: {productsQuantity}</p>
+          {/* <p className='font-medium mb-4'>Всего товаров: {changeProductsQuantity}</p> */}
           <p className='font-bold'>Товары на сумму: </p>
         </div>
       </section>
