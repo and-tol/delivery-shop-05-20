@@ -3,10 +3,10 @@ import { BasketItem } from './BasketItem/BasketItem';
 
 const basket = {
   basketState: [
-    { id: 'pp02', quantity: 1 },
-    { id: 'pp01', quantity: 1 },
-    { id: 'pb02', quantity: 1 },
-    { id: 'pb01', quantity: 1 },
+    { id: 'pp02', quantity: 1, sum: 450 },
+    { id: 'pp01', quantity: 1, sum: 545 },
+    { id: 'pb02', quantity: 1, sum: 693 },
+    { id: 'pb01', quantity: 1, sum: 638 },
   ],
 
   basketProducts: [
@@ -52,18 +52,21 @@ export const Basket = () => {
    * The function increases the quantity of the product in the basket
    */
   const increaseQuantity = (id) => {
-    const indx = basket.basketState.findIndex((el) => el.id === id);
-    const prevQuantity = basket.basketState[indx].quantity;
+    const indxSt = basket.basketState.findIndex((el) => el.id === id);
+    const prevQuantity = basket.basketState[indxSt].quantity;
+    const indxQua = basket.basketProducts.findIndex((el) => el.id === id);
+    const prevSum = basket.basketProducts[indxQua].price;
 
     const currentProduct = {
       id,
       quantity: prevQuantity + 1,
+      sum: prevSum * (prevQuantity + 1) ,
     };
 
     const newBasketState = [
-      ...basket.basketState.slice(0, indx),
+      ...basket.basketState.slice(0, indxSt),
       currentProduct,
-      ...basket.basketState.slice(indx + 1),
+      ...basket.basketState.slice(indxSt + 1),
     ];
 
     basket.basketState = newBasketState;
@@ -74,37 +77,48 @@ export const Basket = () => {
    * The function decreases the quantity of the product in the basket
    */
   const decreaseQuantity = (id) => {
-    const indx = basket.basketState.findIndex((el) => el.id === id);
-    const prevQuantity = basket.basketState[indx].quantity;
+    const indxSt = basket.basketState.findIndex((el) => el.id === id);
+    const prevQuantity = basket.basketState[indxSt].quantity;
+    const indxQua = basket.basketProducts.findIndex((el) => el.id === id);
+    const prevSum = basket.basketProducts[indxQua].price;
 
     const currentProduct = {
       id,
       quantity: prevQuantity - 1,
+      sum: prevSum * (prevQuantity - 1),
     };
 
+
     const newBasketState = [
-      ...basket.basketState.slice(0, indx),
+      ...basket.basketState.slice(0, indxSt),
       currentProduct,
-      ...basket.basketState.slice(indx + 1),
+      ...basket.basketState.slice(indxSt + 1),
     ];
 
     basket.basketState = newBasketState;
     basket.basketProducts = [...basket.basketProducts];
   };
 
-  /**
-   * Функция по id товара находит его стоимость и количество в корзине, и вычисляет общую стоимость конкретного товара.
-   * The function by id of the product finds its value and quantity in the basket, and calculates the total cost of a particular product
-   */
-  const totalPositionCost = (id) => {
-    const indxQuantity = basket.basketState.findIndex((el) => el.id === id);
-    const indxPrice = basket.basketProducts.findIndex((el) => el.id === id);
+  const basketState = basket.basketState;
 
-    const positionQuantity = basket.basketState[indxQuantity].quantity;
-    const positionPrice = basket.basketProducts[indxPrice].price;
+  const basketProducts = basket.basketProducts;
 
-    return positionQuantity * positionPrice;
+  // TODO : realise function this calculate total cost
+  const total = () => {
+    const indxArr = basketState.map((el) => {
+      return el.id;
+    });
+
+    indxArr.map((indx) => basketState.findIndex(indx));
+
+    // const indxQuantity = basketState.findIndex((el) => el.id === id);
+    // const indxPrice = basketProducts.findIndex((el) => el.id === id);
+
+    // console.log('basketState>>> ', basketState)
+    // console.log('basketProducts>>> ', basketProducts)
   };
+
+  // total()
 
   /**
    * Функция считает общее количество товара в корзине.
@@ -119,13 +133,11 @@ export const Basket = () => {
    * Функция изменяет общее количество товаров.
    * The function changes the total quantity of goods.
    */
-  const changeTotalQuantity = () => {
+  const changeQuantity = () => {
     setBasket(totalProductsQuantity());
     console.log('productsQuantity>>>', productsQuantity);
     console.log('basket.basketState>>>', basket.basketState);
   };
-
-
 
   const renderBasket = () =>
     basket.basketProducts.map((product) => {
@@ -136,11 +148,11 @@ export const Basket = () => {
           initialBasketState={basket.basketState}
           increaseQuantity={increaseQuantity}
           decreaseQuantity={decreaseQuantity}
-          changeProductsQuantity={changeTotalQuantity}
+          changeQuantity={changeQuantity}
+          productSum={productSum}
         />
       );
     });
-
 
   return (
     <div className='container flex'>
