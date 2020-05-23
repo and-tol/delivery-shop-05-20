@@ -8,6 +8,7 @@ export const BasketItem = (props) => {
   const initialBasketState = props.initialBasketState;
   const { name, price, image, id } = props.item;
   const increase = props.increaseQuantity;
+  const decrease = props.decreaseQuantity;;
   const changeProductsQuantity = props.changeProductsQuantity;
 
   /**
@@ -25,6 +26,7 @@ export const BasketItem = (props) => {
    */
   const removeCount = () => {
     if (currentCount > 1) {
+      decrease(id);
       setCount(currentCount - 1);
     }
   };
@@ -33,9 +35,9 @@ export const BasketItem = (props) => {
    * The function increases the quantity of goods by one.
    */
   const addCount = () => {
-    console.log('currentCount>>>', currentCount);
-    increase(id);
+    increase(id)
     setCount(currentCount + 1);
+    console.log('currentCount>>>', currentCount);
   };
 
   const sumItem = price * currentCount;
@@ -53,6 +55,7 @@ export const BasketItem = (props) => {
           className='w-1/3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
           onClick={() => {
             removeCount();
+            changeProductsQuantity();
           }}>
           -
         </button>

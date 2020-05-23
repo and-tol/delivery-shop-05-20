@@ -56,7 +56,7 @@ export const Basket = () => {
     const prevQuantity = basket.basketState[indx].quantity;
 
     const currentProduct = {
-      id: id,
+      id,
       quantity: prevQuantity + 1,
     };
 
@@ -68,14 +68,28 @@ export const Basket = () => {
 
     basket.basketState = newBasketState;
     basket.basketProducts = [...basket.basketProducts];
+  };
+  /**
+   * Функция уменьшает в корзине количество товара конкретной позиции.
+   * The function decreases the quantity of the product in the basket
+   */
+  const decreaseQuantity = (id) => {
+    const indx = basket.basketState.findIndex((el) => el.id === id);
+    const prevQuantity = basket.basketState[indx].quantity;
 
-    // console.log('basket', basket);
+    const currentProduct = {
+      id,
+      quantity: prevQuantity - 1,
+    };
 
-    // return {
-    //   basketState: newBasketState,
-    //   basketProducts: [...basket.basketProducts],
-    // };
-    return newBasketState;
+    const newBasketState = [
+      ...basket.basketState.slice(0, indx),
+      currentProduct,
+      ...basket.basketState.slice(indx + 1),
+    ];
+
+    basket.basketState = newBasketState;
+    basket.basketProducts = [...basket.basketProducts];
   };
 
   /**
@@ -106,9 +120,12 @@ export const Basket = () => {
    * The function changes the total quantity of goods.
    */
   const changeTotalQuantity = () => {
-    console.log('productsQuantity>>>', productsQuantity);
     setBasket(totalProductsQuantity());
+    console.log('productsQuantity>>>', productsQuantity);
+    console.log('basket.basketState>>>', basket.basketState);
   };
+
+
 
   const renderBasket = () =>
     basket.basketProducts.map((product) => {
@@ -118,10 +135,12 @@ export const Basket = () => {
           item={product}
           initialBasketState={basket.basketState}
           increaseQuantity={increaseQuantity}
+          decreaseQuantity={decreaseQuantity}
           changeProductsQuantity={changeTotalQuantity}
         />
       );
     });
+
 
   return (
     <div className='container flex'>
