@@ -149,7 +149,6 @@ export const Basket = () => {
           increaseQuantity={increaseQuantity}
           decreaseQuantity={decreaseQuantity}
           changeQuantity={changeQuantity}
-          productSum={productSum}
         />
       );
     });
