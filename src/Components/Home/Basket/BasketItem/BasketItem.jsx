@@ -1,34 +1,44 @@
 import React, { useState } from 'react';
 
 /**
- * Товар в корзине, его цена и количество
+ * Компонент одной позиции товара в корзине, его название, цена и количество.
+ * Component of one item in the basket, its name, price and quantity
  */
 export const BasketItem = (props) => {
-  const inBasketState = props.inBasketState;
+  const initialBasketState = props.initialBasketState;
   const { name, price, image, id } = props.item;
   const increase = props.increaseQuantity;
   const changeProductsQuantity = props.changeProductsQuantity;
 
-  const count = inBasketState.find(el => el.id === id).quantity
-  console.log('count>>>>', count);
+  /**
+   * Количество товара одной позиции
+   * Quantity of product in one position
+   */
+  const count = initialBasketState.find((el) => el.id === id).quantity;
 
-  // изменяется количество товаров
+  // Hooks Отслеживает изменения количества товара одной позиции по клику
+  // Hooks Tracks changes in the quantity of goods of one position per click
   const [currentCount, setCount] = useState(count);
+  /**
+   * Функция уменьшает количество товара на единицу.
+   * The function decreases the quantity of goods per unit.
+   */
   const removeCount = () => {
     if (currentCount > 1) {
       setCount(currentCount - 1);
     }
   };
+  /**
+   * Функция увеличивает количество товара на единицу.
+   * The function increases the quantity of goods by one.
+   */
   const addCount = () => {
-    console.log('currentCount>>>  ', currentCount);
-    setCount(currentCount + 1)
+    console.log('currentCount>>>', currentCount);
+    increase(id);
+    setCount(currentCount + 1);
   };
 
-  // Изменяется сумма за одну позицию
-  const [sumItem, setSum] = useState(price);
-  const allPriceOfPosition = () => {
-    setSum(price * currentCount);
-  };
+  const sumItem = price * currentCount;
 
   return (
     <div className='flex justify-between items-center bg-gray-400 px-4 py-0 mb-1'>
@@ -43,7 +53,6 @@ export const BasketItem = (props) => {
           className='w-1/3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
           onClick={() => {
             removeCount();
-            allPriceOfPosition();
           }}>
           -
         </button>
@@ -52,10 +61,7 @@ export const BasketItem = (props) => {
           className='w-1/3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
           onClick={() => {
             addCount();
-            allPriceOfPosition();
             changeProductsQuantity();
-
-            increase(id);
           }}>
           +
         </button>

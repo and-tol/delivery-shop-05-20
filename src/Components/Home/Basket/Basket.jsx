@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { BasketItem } from './BasketItem/BasketItem';
 
-const inBasket = {
-  inBasketState: [
+const basket = {
+  basketState: [
     { id: 'pp02', quantity: 1 },
     { id: 'pp01', quantity: 1 },
     { id: 'pb02', quantity: 1 },
     { id: 'pb01', quantity: 1 },
   ],
 
-  inBasketProducts: [
+  basketProducts: [
     {
       id: 'pb01',
       name: 'Пицца от Шеф-повара',
@@ -42,88 +42,81 @@ const inBasket = {
   ],
 };
 
+/**
+ * Компонент корзины с товарами
+ * Component of the basket of goods
+ */
 export const Basket = () => {
   /**
-   * Функция увеличивает в корзине количество товара конкретной позиции
+   * Функция увеличивает в корзине количество товара конкретной позиции.
    * The function increases the quantity of the product in the basket
-   * @param {string} id - ID конкретного продукта в корзине
    */
   const increaseQuantity = (id) => {
-    const indx = inBasket.inBasketState.findIndex((el) => el.id === id);
-    const prevQuantity = inBasket.inBasketState[indx].quantity;
+    const indx = basket.basketState.findIndex((el) => el.id === id);
+    const prevQuantity = basket.basketState[indx].quantity;
 
     const currentProduct = {
       id: id,
       quantity: prevQuantity + 1,
     };
 
-    const newInBasketState = [
-      ...inBasket.inBasketState.slice(0, indx),
+    const newBasketState = [
+      ...basket.basketState.slice(0, indx),
       currentProduct,
-      ...inBasket.inBasketState.slice(indx + 1),
+      ...basket.basketState.slice(indx + 1),
     ];
 
-    inBasket.inBasketState = newInBasketState;
-    inBasket.inBasketProducts = [...inBasket.inBasketProducts];
+    basket.basketState = newBasketState;
+    basket.basketProducts = [...basket.basketProducts];
 
-    console.log('inBasket', inBasket);
+    // console.log('basket', basket);
 
-    return {
-      inBasketState: newInBasketState,
-      inBasketProducts: [...inBasket.inBasketProducts],
-    };
+    // return {
+    //   basketState: newBasketState,
+    //   basketProducts: [...basket.basketProducts],
+    // };
+    return newBasketState;
   };
 
   /**
-   * Функция по id товара находит его стоимость и количество в корзине, и вычисляет общую стоимость конкретного товара
+   * Функция по id товара находит его стоимость и количество в корзине, и вычисляет общую стоимость конкретного товара.
    * The function by id of the product finds its value and quantity in the basket, and calculates the total cost of a particular product
-   * @param {number} id  -  товара
    */
   const totalPositionCost = (id) => {
-    const indxQuantity = inBasket.inBasketState.findIndex((el) => el.id === id);
-    const indxPrice = inBasket.inBasketProducts.findIndex((el) => el.id === id);
+    const indxQuantity = basket.basketState.findIndex((el) => el.id === id);
+    const indxPrice = basket.basketProducts.findIndex((el) => el.id === id);
 
-    const positionQuantity = inBasket.inBasketState[indxQuantity].quantity;
-    const positionPrice = inBasket.inBasketProducts[indxPrice].price;
+    const positionQuantity = basket.basketState[indxQuantity].quantity;
+    const positionPrice = basket.basketProducts[indxPrice].price;
 
     return positionQuantity * positionPrice;
   };
-  // console.log(totalPositionCost('pb01'));
 
   /**
-   * Функция считает общее количество товара в корзине
+   * Функция считает общее количество товара в корзине.
    * The function calculates the total quantity of goods in the basket.
    */
-  const totalProductsQuantity = () => {
-    console.log('inBasket2>>> ', inBasket);
+  const totalProductsQuantity = () => basket.basketState.reduce((acc, cur) => acc + cur.quantity, 0);
 
-    return inBasket.inBasketState.reduce((acc, cur) => acc + cur.quantity, 0);
-  };
-
+  // Hooks Отслеживает изменения в общем количестве товаров.
+  // Hooks Track changes in the total quantity of goods
+  const [productsQuantity, setBasket] = useState(totalProductsQuantity());
   /**
-   * Первоначальное общее количество товаров
-   */
-  let productsQuantity = totalProductsQuantity();
-
-  // * ================ * //
-  // Отслеживает изменения в общем количестве товаров
-  const [basket, setBasket] = useState(productsQuantity);
-  /**
-   * Изменяет общее количество товаров
+   * Функция изменяет общее количество товаров.
+   * The function changes the total quantity of goods.
    */
   const changeTotalQuantity = () => {
-    productsQuantity = totalProductsQuantity();
-    setBasket(productsQuantity);
+    console.log('productsQuantity>>>', productsQuantity);
+    setBasket(totalProductsQuantity());
   };
-  // * --------------- * //
 
   const renderBasket = () =>
-    inBasket.inBasketProducts.map((product) => {
+    basket.basketProducts.map((product) => {
       return (
         <BasketItem
           key={product.id}
           item={product}
-          inBasketState={inBasket.inBasketState}
+          initialBasketState={basket.basketState}
           increaseQuantity={increaseQuantity}
           changeProductsQuantity={changeTotalQuantity}
         />
