@@ -10,7 +10,6 @@ export const BasketItem = (props) => {
   const increase = props.increaseQuantity;
   const decrease = props.decreaseQuantity;
   const changeQuantity = props.changeQuantity;
-  const productSum = props.productSum;
 
   /**
    * Количество товара одной позиции
@@ -29,7 +28,6 @@ export const BasketItem = (props) => {
     if (currentCount > 1) {
       decrease(id);
       setCount(currentCount - 1);
-      productSum(id);
     }
   };
   /**
@@ -39,7 +37,6 @@ export const BasketItem = (props) => {
   const addCount = () => {
     increase(id);
     setCount(currentCount + 1);
-    productSum(id);
   };
 
   const sumItem = price * currentCount;

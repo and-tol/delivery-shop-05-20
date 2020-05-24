@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import {ShoppingCartOutlined} from '@ant-design/icons';
-import image from '../../../../data/img/pizza-burger/pizza-dacha.jpg';
+// import image from './../../../../img/pizza-burger/pizza-caesar.jpg';
 
 import { Card, Button } from 'antd';
 const { Meta } = Card;
@@ -16,12 +16,12 @@ export const Product = (props) => {
   };
 
   return (
-    <div style={{ width: 280}}>
+    <div style={{ width: 280 }}>
       <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
         <Card
           hoverable
           style={{ width: 280, minHeight: 418 }}
-          cover={<img alt={name} src={image} />}
+          cover={<img alt={name} src={require('../../../../img/pizza-burger/pizza-caesar.jpg')} />}
           onClick={clickProductCard}>
           <Meta title={name} />
           <div>
@@ -39,7 +39,7 @@ export const Product = (props) => {
         <Card
           hoverable
           style={{ width: 280, minHeight: 418 }}
-          cover={<img alt={name} src={image} />}
+          cover={<img alt={name} src={require('../../../../img/pizza-burger/pizza-caesar.jpg')} />}
           onClick={clickProductCard}>
           <Meta title='Описание' description={description} />
           <div>
