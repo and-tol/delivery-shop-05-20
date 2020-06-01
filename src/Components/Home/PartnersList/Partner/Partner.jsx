@@ -3,12 +3,13 @@ import { NavLink, withRouter } from 'react-router-dom';
 // @ts-ignore
 import { slicer } from 'helpers/helpers';
 
-
 /**
  * Компонент одной карточки партнера
  */
 const Partner = (props) => {
   const { name: partnerName, time_of_delivery: timeOfDelivery, stars, price, kitchen, image, products } = props.item;
+
+  console.log('Partner props.item>>>', partnerName);
 
   /**
    * конфигурация URL адреса
@@ -26,11 +27,18 @@ const Partner = (props) => {
    * По клику на карточку переход на страницу с продукцией конкретного партнера
    */
   const goToPage = () => {
-    props.history.push({ pathname: `/partners${productLink.pathName}` });
+    props.history.push({
+      pathname: `/partners${productLink.pathName}`,
+    });
+    // props.match.params.name
   };
 
   return (
-    <NavLink to={productLink} className='card' onClick={goToPage} partnerName={partnerName}>
+    <NavLink
+      to={{ productLink, state: { name: partnerName } }}
+      className='card'
+      onClick={goToPage}
+      partnerName={partnerName}>
       <img src={`${process.env.PUBLIC_URL}/${image}`} alt={partnerName} className='w-full' />
       <div className='px-6 py-4'>
         <div>

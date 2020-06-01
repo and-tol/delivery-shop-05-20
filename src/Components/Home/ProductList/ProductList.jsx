@@ -11,7 +11,10 @@ import data from 'data/food-band.json';
  * Компонент карточки продукта
  */
 export const ProductList = (props) => {
-console.log('props ProductList>>>', props)
+  console.log('props ProductList>>>', props);
+
+  const partnerName = props.location.state.name;
+
   /**
    * Функция отрисовывает карточки с продукцией
    */
@@ -22,7 +25,7 @@ console.log('props ProductList>>>', props)
 
   return (
     <section>
-      <h3></h3>
+      <h3 className='my-8 text-3xl font-bold'>{partnerName}</h3>
       <div className='flex flex-wrap'>{renderCardsProducts()}</div>
     </section>
   );

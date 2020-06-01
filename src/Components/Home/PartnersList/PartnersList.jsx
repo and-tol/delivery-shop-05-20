@@ -5,7 +5,6 @@ import Partner  from './Partner/Partner';
  */
 // @ts-ignore
 import partners from 'data/partners.json';
-// import partners from '../../../data/partners.json';
 
 /**
  * Компонент выводит список всех партнеров в виде карточек
