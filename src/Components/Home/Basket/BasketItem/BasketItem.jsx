@@ -42,7 +42,7 @@ export const BasketItem = (props) => {
   const sumItem = price * currentCount;
 
   return (
-    <div className='flex justify-between items-center bg-gray-400 px-4 py-0 mb-1'>
+    <div className='basket-product'>
       <div className='w-2/12'>
         <img className='bg-gray-600 max-w-none w-16 h-16' src={image} alt={name} />
       </div>
@@ -51,7 +51,7 @@ export const BasketItem = (props) => {
       <p className='w-1/12 mr-2 my-4 font-bold text-gray-600'>{sumItem} ₽</p>
       <div className='flex items-center justify-end  w-3/12 my-4'>
         <button
-          className='w-1/3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+          className='btn btn:hover w-1/3'
           onClick={() => {
             removeCount();
             changeQuantity();
@@ -60,7 +60,7 @@ export const BasketItem = (props) => {
         </button>
         <span className='w-1/3 text-center'>{currentCount}</span>
         <button
-          className='w-1/3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+          className='btn btn:hover  w-1/3'
           onClick={() => {
             addCount();
             changeQuantity();

@@ -1,14 +1,15 @@
 import React from 'react';
+import {Route} from 'react-router-dom';
+
 import './App.css';
-import { Home } from './../Home/Home';
+import { Home } from '../Home/Home';
 
 import 'antd/dist/antd.css'
 
 function App() {
   return (
     <div className='App'>
-      <Home />
-
+      <Route path='/' component={Home} />
     </div>
   );
 }

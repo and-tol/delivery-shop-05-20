@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BasketItem } from './BasketItem/BasketItem';
 import { helperBasket } from '../../../helpers/helpers';
 
-import { basket } from '../../../data/basket-data/basket';
+import { basket } from '../../../basket-data/basket';
 
 /**
  * Компонент корзины с товарами

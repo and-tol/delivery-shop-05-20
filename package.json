@@ -14,10 +14,12 @@
     "react": "^16.13.1",
     "react-card-flip": "^1.0.10",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "tailwindcss": "^1.4.6"
   },
   "scripts": {
+    "watch:css": "chokidar 'src/tailwind.css' -c 'npm run build:css'",
     "build:css": "postcss src/tailwind.css -o src/main.css",
     "build:tailwind": "tailwindcss build src/tailwind.css -o src/tailwind.generated.css",
     "prestart": "npm run build:tailwind",
@@ -42,5 +44,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "./"
+  "devDependencies": {
+    "chokidar-cli": "^2.1.0",
+    "concurrently": "^5.2.0"
+  }
 }

@@ -1,43 +1,29 @@
+// @ts-nocheck
 import React from 'react';
 import { Product } from './Product';
 
+// import partners from 'data/partners.json';
+// Данные о товаре
+import data from 'data/food-band.json';
+
+// console.log('partners>>>', partners[0].products)
 /**
- * Данные о товаре
+ * Компонент карточки продукта
  */
-const data = [
-  {
-    id: 'pb01',
-    name: 'Пицца от Шеф-повара',
-    description: 'Сыр моцарелла, помидоры, салями, бекон, сыр пармезан, зелень, ветчина',
-    price: 638,
-    image: './../../data/img/pizza-burger/pizza-dacha.jpg',
-    // image: 'img/pizza-burger/pizza-dacha.jpg',
-  },
-
-  {
-    id: 'pb02',
-    name: 'Пицца Мясное ассорти',
-    description: 'Сыр моцарелла, фирменный соус, помидоры, куриная грудка, бекон, свинина, говядина, зелень',
-    price: 693,
-    // image: 'img/pizza-burger/pizza-meat.jpg',
-  },
-];
-
-
-
-/**
- * Компоннент для всех карточек продукции
- */
-export const ProductList = () => {
+export const ProductList = (props) => {
+console.log('props ProductList>>>', props)
   /**
    * Функция отрисовывает карточки с продукцией
    */
-  const renderCardsProducts = () => data.map((card) => <Product key={card.id} item={card} />);
-  
+  const renderCardsProducts = () => data.map((card) => <Product
+      key={card.id}
+      item={card}
+    />);
+
   return (
-    <>
-      <h2>PizzaBurger</h2>
-      {renderCardsProducts()}
-    </>
+    <section>
+      <h3></h3>
+      <div className='flex flex-wrap'>{renderCardsProducts()}</div>
+    </section>
   );
 };

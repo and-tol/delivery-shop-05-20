@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import {ShoppingCartOutlined} from '@ant-design/icons';
-// import image from './../../../../img/pizza-burger/pizza-caesar.jpg';
 
-import { Card, Button } from 'antd';
-const { Meta } = Card;
+// const { Meta } = Card;
 
 export const Product = (props) => {
-  const {name, description, price } = props.item;
+  const { name, description, price, image } = props.item;
+
 
   const [isFlipped, changeFlipped] = useState(false);
 
@@ -15,43 +13,46 @@ export const Product = (props) => {
     changeFlipped(!isFlipped);
   };
 
+  // require('../../../../img/pizza-burger/pizza-caesar.jpg')
+  // process.env.PUBLIC_URL + '/logo.png'
+  // {require(`${image}`)}
+
   return (
-    <div style={{ width: 280 }}>
+    <div>
       <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
-        <Card
-          hoverable
-          style={{ width: 280, minHeight: 418 }}
-          cover={<img alt={name} src={require('../../../../img/pizza-burger/pizza-caesar.jpg')} />}
-          onClick={clickProductCard}>
-          <Meta title={name} />
-          <div>
-            <Button icon={<ShoppingCartOutlined />} size={'small'}>
-              <span>В корзину</span>
-              {/* <span className='button-cart-svg'></span> */}
-            </Button>
+        <article className='card' onClick={clickProductCard}>
+          <img src={process.env.PUBLIC_URL + '/' + image} alt={name} className='w-full' />
+          <div className='px-6 py-4'>
+            <div className='py-2'>
+              <h4 className='card_title'>{name}</h4>
+            </div>
 
-            <p>
-              Стоимость: <strong>{price} ₽</strong>
-            </p>
+            <div className='py-4'>
+              <button className='btn btn:hover mr-4'>
+                <span className='mr-1'>В корзину</span>
+                <span className='button-cart-svg'></span>
+              </button>
+              <div className='tag'>{price} ₽</div>
+            </div>
           </div>
-        </Card>
+        </article>
 
-        <Card
-          hoverable
-          style={{ width: 280, minHeight: 418 }}
-          cover={<img alt={name} src={require('../../../../img/pizza-burger/pizza-caesar.jpg')} />}
-          onClick={clickProductCard}>
-          <Meta title='Описание' description={description} />
-          <div>
-            <Button icon={<ShoppingCartOutlined />} size={'small'}>
-              <span>В корзину</span>
-              {/* <span className='button-cart-svg'></span> */}
-            </Button>
-            <p>
-              Стоимость: <strong>{price} ₽</strong>
-            </p>
+        <article className='card' onClick={clickProductCard}>
+          <img src={process.env.PUBLIC_URL + '/' + image} alt={name} className='w-full' />
+          <div className='px-6 py-4'>
+            <div className='py-4'>
+              <div>{description}</div>
+            </div>
+
+            <div className='py-4'>
+              <button className='btn btn:hover mr-4'>
+                <span className='mr-1'>В корзину</span>
+                <span className='button-cart-svg'></span>
+              </button>
+              <strong className='tag'>{price} ₽</strong>
+            </div>
           </div>
-        </Card>
+        </article>
       </ReactCardFlip>
     </div>
   );

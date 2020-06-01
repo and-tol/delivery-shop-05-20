@@ -16,3 +16,9 @@ export const helperBasket = (id, basket) => {
     },
   };
 };
+
+/**
+ * Функция возвращает строку без послених пять символов
+ * @param {string} x
+ */
+export const slicer = (x) => x.slice(0, -5);
