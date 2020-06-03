@@ -18,3 +18,18 @@ export const getData = async function (url) {
 //   .catch((err) => {
 //     console.log(err);
 //   });
+
+export class DBService {
+  getData = async (url) => {
+    const res = await fetch(url)
+     if (res.ok) {
+       return res.json()
+     } else {
+       throw Error(`Не удалось получить данные по адресу ${url}. Ошибка ${res.status}`);
+     }
+  }
+
+  getPartnersData = () => {
+    return this.getData('data/partners.json')
+  }
+}

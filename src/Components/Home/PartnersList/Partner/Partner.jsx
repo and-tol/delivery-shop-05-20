@@ -9,8 +9,6 @@ import { slicer } from 'helpers/helpers';
 const Partner = (props) => {
   const { name: partnerName, time_of_delivery: timeOfDelivery, stars, price, kitchen, image, products } = props.item;
 
-  console.log('Partner props.item>>>', partnerName);
-
   /**
    * конфигурация URL адреса
    */
@@ -38,7 +36,7 @@ const Partner = (props) => {
       to={{ productLink, state: { name: partnerName } }}
       className='card'
       onClick={goToPage}
-      partnerName={partnerName}>
+      partnername={partnerName}>
       <img src={`${process.env.PUBLIC_URL}/${image}`} alt={partnerName} className='w-full' />
       <div className='px-6 py-4'>
         <div>

@@ -9,7 +9,7 @@ import partners from 'data/partners.json';
 /**
  * Компонент выводит список всех партнеров в виде карточек
  */
-export const PartnersList = (props) => {
+export const PartnersList = () => {
   const renderCardsPartner = () => partners.map((card) => <Partner
     key={card.name}
     item={card}

@@ -2,26 +2,39 @@
 import React from 'react';
 import { Product } from './Product';
 
-// import partners from 'data/partners.json';
 // Данные о товаре
-import data from 'data/food-band.json';
+import data from 'data/data.json';
 
-// console.log('partners>>>', partners[0].products)
 /**
  * Компонент карточки продукта
  */
 export const ProductList = (props) => {
-  console.log('props ProductList>>>', props);
-
+  /**
+   * Название партнера, передаваемое при клике на карточку этого партнера
+   */
   const partnerName = props.location.state.name;
+
+  /**
+   * Данные о продукте конкретного партнера.
+   */
+  let currentProductsData = [];
+  for (const key in data) {
+    if (key === partnerName) {
+      currentProductsData = data[partnerName];
+    }
+  }
 
   /**
    * Функция отрисовывает карточки с продукцией
    */
-  const renderCardsProducts = () => data.map((card) => <Product
-      key={card.id}
-      item={card}
-    />);
+  const renderCardsProducts = () =>
+    currentProductsData.map((card) => (
+      <Product
+        key={card.id}
+        item={card}
+        partnerName={partnerName}
+      />
+    ));
 
   return (
     <section>

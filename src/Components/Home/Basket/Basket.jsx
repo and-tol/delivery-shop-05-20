@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BasketItem } from './BasketItem/BasketItem';
-import { helperBasket } from '../../../helpers/helpers';
+import { helperBasket } from 'helpers/helpers';
 
-import { basket } from '../../../basket-data/basket';
+import { basket } from 'basket-data/basket-data';
 
 /**
  * Компонент корзины с товарами
@@ -10,15 +10,15 @@ import { basket } from '../../../basket-data/basket';
  */
 export const Basket = () => {
   /**
-   * Массив состояния продуктов в корзине
-   * Array of product status in the basket
+   * Список состояния продуктов в корзине в виде массива.
+   * List of product status in the basket as an array
    */
   const basketState = basket.basketState;
 
   /**
-   * Функция формирует новый массив состояния корзины после увеличения или уменьшения количества.
-   * The function forms a new basket state array after changing the quantity
-   * @param {string} indxSt
+   * Функция формирует новый список/массив состояния корзины после увеличения или уменьшения количества.
+   * The function forms a new basket state list/array after changing the quantity
+   * @param {number} indxSt индекс товара, подлежащий изменению. item index to be changed
    * @param {object} currentProduct
    */
   const newBasketState = (indxSt, currentProduct) => [
@@ -33,11 +33,26 @@ export const Basket = () => {
    */
   const increaseQuantity = (id) => {
     const indexes = helperBasket(id, basket);
-
+    /**
+     * Индекс предыдущего товара товара
+     * Index of the previous product item
+     */
     const indxSt = indexes.indxSt;
+    /**
+     * Предыдущее количество товара
+     * Previous product quantity
+     */
     const prevQuantity = indexes.prevQuantity;
+    /**
+     * Предыдущая сумма за товар
+     * Previous product amount
+     */
     const prevSum = indexes.prevSum;
 
+    /**
+     * Продукт для добавления в корзину.
+     * Product to add to cart
+     */
     const currentProduct = {
       id,
       quantity: prevQuantity + 1,
@@ -74,14 +89,14 @@ export const Basket = () => {
    */
   const totalProductsQuantity = () => basket.basketState.reduce((acc, cur) => acc + cur.quantity, 0);
 
-  // Hooks Отслеживает изменения в общем количестве товаров.
-  // Hooks Track changes in the total quantity of goods
+  // Hook Отслеживает изменения в общем количестве товаров.
+  // Hook Track changes in the total quantity of goods
   const [productsQuantity, setBasket] = useState(totalProductsQuantity());
   /**
    * Функция изменяет общее количество товаров.
    * The function changes the total quantity of goods.
    */
-  const changeQuantity = () => {
+  const changeTotalQuantity = () => {
     setBasket(totalProductsQuantity());
   };
 
@@ -104,7 +119,7 @@ export const Basket = () => {
           initialBasketState={basket.basketState}
           increaseQuantity={increaseQuantity}
           decreaseQuantity={decreaseQuantity}
-          changeQuantity={changeQuantity}
+          changeQuantity={changeTotalQuantity}
         />
       );
     });
