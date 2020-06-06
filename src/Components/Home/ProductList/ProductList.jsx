@@ -9,6 +9,7 @@ import data from 'data/data.json';
  * Компонент карточки продукта
  */
 export const ProductList = (props) => {
+  console.log('ProductList props>>>', props);
   /**
    * Название партнера, передаваемое при клике на карточку этого партнера
    */

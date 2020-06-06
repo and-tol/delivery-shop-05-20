@@ -125,10 +125,10 @@ export const Basket = () => {
     });
 
   return (
-    <div className='container flex'>
-      <section className='container w-2/3 mx-auto p-2 bg-gray-200'>{renderBasket()}</section>
-      <section className='container w-1/3 p-2'>
-        <div className='container w-full h-full border border-gray-400 p-4'>
+    <div className='flex'>
+      <section className='w-2/3 mx-auto p-2 bg-gray-200'>{renderBasket()}</section>
+      <section className='w-1/3 p-2'>
+        <div className='w-full h-full border border-gray-400 p-4'>
           <p className='font-medium mb-4'>Всего товаров: {productsQuantity}</p>
           <p className='font-bold'>Товары на сумму: {total()} ₽</p>
         </div>
