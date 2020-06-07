@@ -17875,10 +17875,12 @@ video {
   border-color: #4299e1;
   border-color: rgba(66, 153, 225, var(--border-opacity));
   border-radius: 0.25rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  box-sizing: border-box;
+  line-height: 1;
 }
 
 .btn:hover {

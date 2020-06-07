@@ -7,8 +7,9 @@ import { Basket } from './Basket/Basket';
 import { Layout} from 'antd';
 import styles from './Home.module.css';
 import partners from 'data/partners.json';
-import { Wrapper } from './../../UI/Wrapper';
+import { Wrapper } from 'UI/Wrapper';
 import { OpenBasket } from './Basket/OpenBasket/OpenBasket';
+import { Logo } from 'UI/Logo';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -28,7 +29,8 @@ export const Home = (props) => {
     <Layout>
       <Header>
         <Wrapper>
-          <span>Header</span>
+          {/* <Route path='/' component={Logo} /> */}
+          <Logo />
           <button className='btn btn:hover' onClick={goToHomePage}>
             На главную
           </button>

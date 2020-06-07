@@ -54,14 +54,3 @@ const Partner = (props) => {
 };
 
 export default withRouter(Partner);
-
-const Partner = (props) => {
-  //По клику на карточку переход на страницу с продукцией конкретного партнера
-  const goToPage = () => {
-    props.history.push({
-      pathname: `/partners${productLink.pathName}`,
-    });
-  };
-
-  return <NavLink onClick={goToPage}></NavLink>;
-};
