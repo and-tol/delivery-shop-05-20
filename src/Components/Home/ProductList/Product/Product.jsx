@@ -19,14 +19,13 @@ export const Product = (props) => {
   // {require(`${image}`)}
 
   /**
-   * Функция добавляет товар в корзину
+   * Функция добавляет товар в корзину.
+   * The function adds the product to the cart.
    */
   const addToBasket = () => {
-    const isExistingProduct = basket.basketProducts.includes((item) => item.id === id);
-
-    increaseQuantity(id)
-    console.log('in basket>>>', basket)
-
+    
+    increaseQuantity(id);
+    console.log('in basket>>>', basket);
   };
 
   return (

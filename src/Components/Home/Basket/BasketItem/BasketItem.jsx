@@ -10,12 +10,14 @@ export const BasketItem = (props) => {
   const increase = props.increaseQuantity;
   const decrease = props.decreaseQuantity;
   const changeQuantity = props.changeQuantity;
-
+console.log('props', props)
   /**
    * Количество товара одной позиции
    * Quantity of product in one position
    */
-  const count = initialBasketState.find((el) => el.id === id).quantity;
+  const count = initialBasketState.length
+    ? initialBasketState.find((el) => el.id === id).quantity
+    : 0;
 
   // Hooks Отслеживает изменения количества товара одной позиции по клику
   // Hooks Tracks changes in the quantity of product of one position per click

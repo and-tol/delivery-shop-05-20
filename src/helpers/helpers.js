@@ -8,6 +8,7 @@ import data from 'data/data.json';
  * @returns {Object} - количество и сумма товара уже находящегося в корзине. quantity and amount
  */
 export const helperBasket = (id, basket) => {
+
   return {
     /**
      * ID товара уже находящееся в корзине.
@@ -30,12 +31,13 @@ export const helperBasket = (id, basket) => {
      */
     indxProducts: basket.basketProducts.findIndex((el) => el.id === id),
     get prevSum() {
-      console.log('indxProducts', this.indxProducts);
+
       if (this.indxState === -1) {
         let product = {};
         for (const key in data) {
           product = data[key].find((el) => el.id === id);
         }
+        // FIXME: проверка на отсутствие товара в корзине
         return product.price;
       }
       return basket.basketState[this.indxState].sum;

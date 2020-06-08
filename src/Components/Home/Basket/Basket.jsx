@@ -107,7 +107,7 @@ export const Basket = () => {
   const total = () => basketState.reduce((acc, cur) => acc + cur.sum, 0);
 
   /**
-   * Функция формирует список товаров корзине.
+   * Функция формирует список товаров в корзине.
    * The function creates a list of goods in the basket
    */
   const renderBasket = () =>
@@ -117,6 +117,7 @@ export const Basket = () => {
           key={product.id}
           item={product}
           initialBasketState={basket.basketState}
+          // FIXME: TODO: функция должна увеличивать количество товаров в корзине через корзину
           increaseQuantity={increaseQuantity}
           decreaseQuantity={decreaseQuantity}
           changeQuantity={changeTotalQuantity}
