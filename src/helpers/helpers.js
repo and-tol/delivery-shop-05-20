@@ -8,15 +8,14 @@ import data from 'data/data.json';
  * @returns {Object} - количество и сумма товара уже находящегося в корзине. quantity and amount
  */
 export const helperBasket = (id, basket) => {
-
   return {
     /**
-     * ID товара уже находящееся в корзине.
+     * ID товара уже находящегося в корзине.
      * Product ID already in the basket
      */
-    indxState: basket.basketState.findIndex((el) => el.id === id),
+    indxState: basket.basketState.findIndex((product) => product.id === id),
     /**
-     * Количество конкретного по ID товара уже находящееся в корзине.
+     * Количество конкретного по ID товара уже находящегося в корзине.
      * The quantity of a specific product ID already in the basket
      */
     get prevQuantity() {
@@ -30,14 +29,35 @@ export const helperBasket = (id, basket) => {
      * Product ID in the database
      */
     indxProducts: basket.basketProducts.findIndex((el) => el.id === id),
-    get prevSum() {
 
+    /**
+     * Функция возвращает сумму позиции товара в корзине.
+     * The function returns the sum of the product position in the basket.
+     */
+    get prevSum() {
+      // проверка на отсутствие товара в корзине
       if (this.indxState === -1) {
-        let product = {};
-        for (const key in data) {
-          product = data[key].find((el) => el.id === id);
-        }
-        // FIXME: проверка на отсутствие товара в корзине
+
+        // * variant 1
+        // const partner = Object.keys(data)
+        //   .filter((partner) => data[partner]
+        //     .find((product) => product.id === id));
+        const product = data[
+          Object.keys(data)
+          .filter((partner) => data[partner]
+            .find((product) => product.id === id))
+        ].find((product) => product.id === id);
+
+        // * variant 2
+        // let product = {}
+        // for (const partner in data) {
+        //   let result = data[partner].find((product) => product.id === id);
+
+        //   if (result) {
+        //     product = result;
+        //   }
+        // }
+        console.log('product', product);
         return product.price;
       }
       return basket.basketState[this.indxState].sum;
@@ -46,7 +66,8 @@ export const helperBasket = (id, basket) => {
 };
 
 /**
- * Функция возвращает строку без последних пять символов
+ * Функция возвращает строку без последних пяти символов.
+ * The function returns a value without the last five characters.
  * @param {string} x
  */
 export const slicer = (x) => x.slice(0, -5);

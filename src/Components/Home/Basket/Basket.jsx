@@ -5,7 +5,7 @@ import { helperBasket } from 'helpers/helpers';
 import { basket } from 'basket-data/basket-data';
 
 /**
- * Компонент корзины с товарами
+ * Компонент корзины с товарами.
  * Component of the basket of goods
  */
 export const Basket = () => {
@@ -14,6 +14,9 @@ export const Basket = () => {
    * List of product status in the basket as an array
    */
   const basketState = basket.basketState;
+
+  console.log('basketState>>>', basketState);
+  console.log('basketProducts>>>', basket.basketProducts);
 
   /**
    * Функция формирует новый список/массив состояния корзины после увеличения или уменьшения количества.

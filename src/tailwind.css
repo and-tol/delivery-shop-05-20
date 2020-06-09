@@ -12,6 +12,10 @@
   @apply bg-blue-500 text-white border-transparent;
 }
 
+.btn-v-icon {
+  @apply flex items-center;
+}
+
 .card {
   @apply max-w-xs rounded overflow-hidden shadow-lg cursor-pointer bg-white mr-4 mb-4;
 }
