@@ -4,7 +4,8 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { slicer } from 'helpers/helpers';
 
 /**
- * Компонент одной карточки партнера
+ * Компонент карточки партнера
+ * Component of partner card
  */
 const Partner = (props) => {
   const { name: partnerName, time_of_delivery: timeOfDelivery, stars, price, kitchen, image, products } = props.item;

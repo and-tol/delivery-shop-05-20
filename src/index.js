@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
+// import './index.css';
 import App from './Components/App/App';
 import * as serviceWorker from './serviceWorker';
-import './tailwind.generated.css'
-
+// import './tailwind.generated.css'
+import './css/tailwind.css';
 
 ReactDOM.render(
   <BrowserRouter>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import { basket, setBasketState } from 'basket-data/basket-data';
-import { increaseQuantity, newBasketState } from '../../../../basket-data/basket-data';
-console.log('basket>>>', basket);
+// TODO: реализовать функцию addProduct
+import { basket, increaseQuantity, addProduct } from 'basket-data/basket-data';
+import * as data from 'data/data.json';
+
+
 /**
  * Компонент карточки товара
  */
@@ -12,6 +14,7 @@ export const Product = (props) => {
   const [isFlipped, changeFlipped] = useState(false);
   /**
    * Функция "переворачивает карточку"
+   * Function "flips" the card
    */
   const clickProductCard = () => {
     changeFlipped(!isFlipped);
@@ -23,8 +26,8 @@ export const Product = (props) => {
    * The function adds the product to the cart.
    */
   const addToBasket = () => {
-    
     increaseQuantity(id);
+    addProduct(id, data.default);
     console.log('in basket>>>', basket);
   };
 

@@ -1,6 +1,17 @@
 import data from 'data/data.json';
 
 /**
+ * Функция ищет продукт по ID в базе данных.
+ * The function searches for a product by ID in the database
+ * @param {string} id - ID добавляемого в корзину продукта. ID of the product to adding to the basket.
+ * @param {object} data - база данных.database
+ * @returns {object} - найденный в базе данных продукт. The product found in the database
+ */
+export const findProductById = (id, data) => {
+  return data[Object.keys(data).filter((partner) => data[partner].find((product) => product.id === id))].find((product) => product.id === id);
+};
+
+/**
  * Функция создает объект по индексу с количеством и суммой продукта уже находящегося в корзине.
  * The function creates an object by index with the quantity and sum of the product already in the basket.
  * @param {String} id - ID продукта в корзине. Product ID in basket
@@ -33,20 +44,20 @@ export const helperBasket = (id, basket) => {
     /**
      * Функция возвращает сумму позиции товара в корзине.
      * The function returns the sum of the product position in the basket.
+     * @returns {number}
      */
     get prevSum() {
       // проверка на отсутствие товара в корзине
       if (this.indxState === -1) {
-
         // * variant 1
         // const partner = Object.keys(data)
         //   .filter((partner) => data[partner]
         //     .find((product) => product.id === id));
-        const product = data[
-          Object.keys(data)
-          .filter((partner) => data[partner]
-            .find((product) => product.id === id))
-        ].find((product) => product.id === id);
+        // const product = data[
+        //   Object.keys(data).filter((partner) => data[partner].find((product) => product.id === id))
+        // ].find((product) => product.id === id);
+
+        const product = findProductById(id, data);
 
         // * variant 2
         // let product = {}
@@ -57,7 +68,7 @@ export const helperBasket = (id, basket) => {
         //     product = result;
         //   }
         // }
-        console.log('product', product);
+
         return product.price;
       }
       return basket.basketState[this.indxState].sum;

@@ -10,7 +10,7 @@ export const BasketItem = (props) => {
   const increase = props.increaseQuantity;
   const decrease = props.decreaseQuantity;
   const changeQuantity = props.changeQuantity;
-console.log('props', props)
+console.log('props', props.item)
   /**
    * Количество товара одной позиции
    * Quantity of product in one position

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { BasketItem } from './BasketItem/BasketItem';
 import { helperBasket } from 'helpers/helpers';
-
-import { basket } from 'basket-data/basket-data';
+import { basket, newBasketState, increaseQuantity } from '../../../basket-data/basket-data';
 
 /**
  * Компонент корзины с товарами.
@@ -15,56 +14,9 @@ export const Basket = () => {
    */
   const basketState = basket.basketState;
 
-  console.log('basketState>>>', basketState);
-  console.log('basketProducts>>>', basket.basketProducts);
+  // console.log('basketState>>>', basketState);
+  // console.log('basketProducts>>>', basket.basketProducts);
 
-  /**
-   * Функция формирует новый список/массив состояния корзины после увеличения или уменьшения количества.
-   * The function forms a new basket state list/array after changing the quantity
-   * @param {number} indxSt индекс товара, подлежащий изменению. item index to be changed
-   * @param {object} currentProduct
-   */
-  const newBasketState = (indxSt, currentProduct) => [
-    ...basket.basketState.slice(0, indxSt),
-    currentProduct,
-    ...basket.basketState.slice(indxSt + 1),
-  ];
-
-  /**
-   * Функция увеличивает в корзине количество товара конкретной позиции.
-   * The function increases the quantity of the product in the basket
-   */
-  const increaseQuantity = (id) => {
-    const indexes = helperBasket(id, basket);
-    /**
-     * Индекс предыдущего товара товара
-     * Index of the previous product item
-     */
-    const indxSt = indexes.indxSt;
-    /**
-     * Предыдущее количество товара
-     * Previous product quantity
-     */
-    const prevQuantity = indexes.prevQuantity;
-    /**
-     * Предыдущая сумма за товар
-     * Previous product amount
-     */
-    const prevSum = indexes.prevSum;
-
-    /**
-     * Продукт для добавления в корзину.
-     * Product to add to cart
-     */
-    const currentProduct = {
-      id,
-      quantity: prevQuantity + 1,
-      sum: prevSum * (prevQuantity + 1),
-    };
-
-    basket.basketState = newBasketState(indxSt, currentProduct);
-    basket.basketProducts = [...basket.basketProducts];
-  };
   /**
    * Функция уменьшает в корзине количество товара конкретной позиции.
    * The function decreases the quantity of the product in the basket
@@ -115,6 +67,7 @@ export const Basket = () => {
    */
   const renderBasket = () =>
     basket.basketProducts.map((product) => {
+
       return (
         <BasketItem
           key={product.id}
