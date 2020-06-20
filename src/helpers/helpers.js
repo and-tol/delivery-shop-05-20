@@ -2,7 +2,7 @@ import data from 'data/data.json';
 
 /**
  * Функция ищет продукт по ID в базе данных.
- * The function searches for a product by ID in the database
+ * @function findProductById The function searches for a product by ID in the database
  * @param {string} id - ID добавляемого в корзину продукта. ID of the product to adding to the basket.
  * @param {object} data - база данных.database
  * @returns {object} - найденный в базе данных продукт. The product found in the database
@@ -13,7 +13,7 @@ export const findProductById = (id, data) => {
 
 /**
  * Функция создает объект по индексу с количеством и суммой продукта уже находящегося в корзине.
- * The function creates an object by index with the quantity and sum of the product already in the basket.
+ * @function helperBasket The function creates an object by index with the quantity and sum of the product already in the basket.
  * @param {String} id - ID продукта в корзине. Product ID in basket
  * @param {Object} basket - объект состояния корзины и перечень продуктов в корзине. basket status object and list of products in the basket
  * @returns {Object} - количество и сумма товара уже находящегося в корзине. quantity and amount
@@ -78,7 +78,8 @@ export const helperBasket = (id, basket) => {
 
 /**
  * Функция возвращает строку без последних пяти символов.
- * The function returns a value without the last five characters.
+ * @function slicer The function returns a value without the last five characters.
  * @param {string} x
+ * @returns {string} String without last five signs
  */
 export const slicer = (x) => x.slice(0, -5);

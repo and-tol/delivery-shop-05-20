@@ -5,7 +5,7 @@ import basketIcon from 'assets/icon/shopping-cart.svg';
 
 /**
  * Компонент открывает страницу корзины товаров.
- * The component opens the cart page
+ * @component The component open the basket page
  */
 export const OpenBasket = () => {
   const onBasket = () => {};
