@@ -7,10 +7,9 @@ import React, { useState } from 'react';
 export const BasketItem = (props) => {
   const initialBasketState = props.initialBasketState;
   const { name, price, image, id } = props.item;
-  const increase = props.increaseQuantity;
-  const decrease = props.decreaseQuantity;
   const changeQuantity = props.changeQuantity;
-  console.log('props', props.item);
+  const changeTotalQuantity = props.changeTotalQuantity;
+
   /**
    * Количество товара одной позиции
    * @constant {Number} Quantity of product in one position
@@ -28,7 +27,7 @@ export const BasketItem = (props) => {
    */
   const removeCount = () => {
     if (currentCount > 1) {
-      decrease(id);
+      changeQuantity(id, '-');
       setCount(currentCount - 1);
     }
   };
@@ -37,8 +36,15 @@ export const BasketItem = (props) => {
    * @function addCount This function increases the quantity of a specific product by one
    */
   const addCount = () => {
-    increase(id);
+    changeQuantity(id, '+');
     setCount(currentCount + 1);
+  };
+
+  /**
+   * @function removeAllProduct - Function delete all quantity of product
+   */
+  const removeAllProduct = () => {
+    console.log('removeAll');
   };
 
   /**
@@ -60,23 +66,29 @@ export const BasketItem = (props) => {
       <p className='w-1/12 mr-2 my-4 font-bold text-gray-600'>{sumItem} ₽</p>
       <div className='flex items-center justify-end  w-3/12 my-4'>
         <button
-          className='btn btn:hover w-1/3'
+          className='btn btn-std btn-std:hover w-1/3 btn-std'
           onClick={() => {
             removeCount();
-            changeQuantity('-');
+            changeTotalQuantity();
           }}
         >
           -
         </button>
         <span className='w-1/3 text-center'>{currentCount}</span>
         <button
-          className='btn btn:hover  w-1/3'
+          className='btn btn-std btn-std:hover  w-1/3'
           onClick={() => {
             addCount();
-            changeQuantity('+');
+            changeTotalQuantity();
           }}
         >
           +
+        </button>
+        <button
+          className='btn w-2/12 m-2 btn-del btn-del:hover '
+          onClick={removeAllProduct}
+        >
+          &times;
         </button>
       </div>
     </div>

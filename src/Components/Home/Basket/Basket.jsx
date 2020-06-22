@@ -3,8 +3,6 @@ import { BasketItem } from './BasketItem/BasketItem';
 import {
   basket,
   newBasketState,
-  increaseQuantity,
-  decreaseQuantity,
   changeQuantity,
   // TODO: реализовать вместо incr/decr
 } from '../../../basket-data/basket-data';
@@ -56,10 +54,8 @@ export const Basket = () => {
           key={product.id}
           item={product}
           initialBasketState={basket.basketState}
-          // FIXME: TODO: функция должна увеличивать количество товаров в корзине через корзину
-          increaseQuantity={increaseQuantity}
-          decreaseQuantity={decreaseQuantity}
-          changeQuantity={changeTotalQuantity}
+          changeTotalQuantity={changeTotalQuantity}
+          changeQuantity={changeQuantity}
         />
       );
     });

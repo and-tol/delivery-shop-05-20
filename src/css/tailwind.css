@@ -17911,14 +17911,8 @@ a:hover {
 
 .btn {
   background-color: transparent;
-  --text-opacity: 1;
-  color: #2b6cb0;
-  color: rgba(43, 108, 176, var(--text-opacity));
   font-weight: 600;
   border-width: 1px;
-  --border-opacity: 1;
-  border-color: #4299e1;
-  border-color: rgba(66, 153, 225, var(--border-opacity));
   border-radius: 0.25rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -17926,9 +17920,12 @@ a:hover {
   padding-right: 1rem;
   box-sizing: border-box;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
-.btn:hover {
+.btn-std:hover {
   --bg-opacity: 1;
   background-color: #4299e1;
   background-color: rgba(66, 153, 225, var(--bg-opacity));
@@ -17941,6 +17938,34 @@ a:hover {
 .btn-v-icon {
   display: flex;
   align-items: center;
+}
+
+.btn-std {
+  --text-opacity: 1;
+  color: #2b6cb0;
+  color: rgba(43, 108, 176, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #4299e1;
+  border-color: rgba(66, 153, 225, var(--border-opacity));
+}
+
+.btn-del {
+  --border-opacity: 1;
+  border-color: #e53e3e;
+  border-color: rgba(229, 62, 62, var(--border-opacity));
+  --text-opacity: 1;
+  color: #f56565;
+  color: rgba(245, 101, 101, var(--text-opacity));
+}
+
+.btn-del:hover {
+  --bg-opacity: 1;
+  background-color: #f56565;
+  background-color: rgba(245, 101, 101, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  border-color: transparent;
 }
 
 .card {

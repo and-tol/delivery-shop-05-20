@@ -2,7 +2,7 @@ import data from 'data/data.json';
 
 /**
  * Функция ищет продукт по ID в базе данных.
- * @function findProductById The function searches for a product by ID in the database
+ * @function findProductById The function search the product by ID in the database
  * @param {string} id - ID добавляемого в корзину продукта. ID of the product to adding to the basket.
  * @param {object} data - база данных.database
  * @returns {object} - найденный в базе данных продукт. The product found in the database
