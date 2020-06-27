@@ -20,9 +20,6 @@ export const Basket = (props) => {
   const basket = props.basket;
   const basketState = basket.basketState;
 
-  // const removeProduct = props.removeProduct;
-  // const handleRemoveProduct = props.handleRemoveProduct;
-
   /**
    * Функция считает общее количество товара в корзине.
    * @function totalProductsQuantity calculates the total quantity of goods in the basket.
@@ -37,7 +34,7 @@ export const Basket = (props) => {
   const [productsQuantity, setQuantityProducts] = useState(
     totalProductsQuantity(basketState)
   );
-  console.log('productsQuantity', productsQuantity);
+
   /**
    * Функция изменяет общее количество товаров.
    * @function changeTotalQuantity changes the total quantity of goods.
@@ -66,7 +63,7 @@ export const Basket = (props) => {
 
   /**
    * Функция формирует список товаров в корзине.
-   * @function renderBasket The function creates a list of goods in the basket
+   * @function renderBasket creates a list of goods in the basket
    */
   const renderBasket = () =>
     basket.basketProducts.map((product) => {

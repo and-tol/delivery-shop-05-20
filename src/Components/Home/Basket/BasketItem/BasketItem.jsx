@@ -75,30 +75,30 @@ export const BasketItem = (props) => {
       <p className='w-1/12 mr-2 my-4 font-bold text-gray-600'>{sumItem} ₽</p>
       <div className='flex items-center justify-end  w-3/12 my-4'>
         <button
+          type='button'
           className='btn btn-std btn-std:hover w-1/3 btn-std'
           onClick={() => {
             removeCount();
-            // changeTotalQuantity();
           }}
         >
           -
         </button>
         <span className='w-1/3 text-center'>{currentCount}</span>
         <button
+          type='button'
           className='btn btn-std btn-std:hover  w-1/3'
           onClick={() => {
             addCount();
-            // changeTotalQuantity();
           }}
         >
           +
         </button>
+
         <button
+          type='button'
           className='btn w-2/12 m-2 btn-del btn-del:hover '
           onClick={() => {
- 
             // handleRemoveProduct(id, basket);
- 
           }}
         >
           &times;
