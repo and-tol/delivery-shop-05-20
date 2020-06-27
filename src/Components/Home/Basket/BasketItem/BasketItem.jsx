@@ -13,7 +13,7 @@ export const BasketItem = (props) => {
   const changeQuantity = props.changeQuantity;
   const changeTotalQuantity = props.changeTotalQuantity;
 
-  const removeProduct = props.removeProduct;
+  // const removeProduct = props.removeProduct;
   const handleRemoveProduct = props.handleRemoveProduct;
 
   /**
@@ -37,12 +37,13 @@ export const BasketItem = (props) => {
   const [currentCount, setCount] = useState(count);
   /**
    * Функция уменьшает количество товара на единицу.
-   * @function removeCount The function decreases the quantity of a specific product by one.
+   * @function removeCount decreases the quantity of a specific product by one.
    */
   const removeCount = () => {
     if (currentCount > 1) {
       changeQuantity(id, '-');
       setCount(currentCount - 1);
+      changeTotalQuantity(basket.basketState);
     }
   };
   /**
@@ -52,6 +53,7 @@ export const BasketItem = (props) => {
   const addCount = () => {
     changeQuantity(id, '+');
     setCount(currentCount + 1);
+    changeTotalQuantity(basket.basketState);
   };
 
   /**
@@ -76,7 +78,7 @@ export const BasketItem = (props) => {
           className='btn btn-std btn-std:hover w-1/3 btn-std'
           onClick={() => {
             removeCount();
-            changeTotalQuantity();
+            // changeTotalQuantity();
           }}
         >
           -
@@ -86,7 +88,7 @@ export const BasketItem = (props) => {
           className='btn btn-std btn-std:hover  w-1/3'
           onClick={() => {
             addCount();
-            changeTotalQuantity();
+            // changeTotalQuantity();
           }}
         >
           +
@@ -94,9 +96,9 @@ export const BasketItem = (props) => {
         <button
           className='btn w-2/12 m-2 btn-del btn-del:hover '
           onClick={() => {
-            // removeAllProductCount(id)
-            handleRemoveProduct(id, basket);
-            // removeProduct(id, basket);
+ 
+            // handleRemoveProduct(id, basket);
+ 
           }}
         >
           &times;
