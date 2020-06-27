@@ -5,18 +5,32 @@ import React, { useState } from 'react';
  * @component Component of one item in the basket, its name, price and quantity
  */
 export const BasketItem = (props) => {
-  const initialBasketState = props.initialBasketState;
+  console.log('props', props)
+  const basket = props.basket;
+
+  const initialBasketState = basket.basketState;
   const { name, price, image, id } = props.item;
   const changeQuantity = props.changeQuantity;
   const changeTotalQuantity = props.changeTotalQuantity;
 
+  const removeProduct = props.removeProduct;
+  const handleRemoveProduct = props.handleRemoveProduct;
+
   /**
    * Количество товара одной позиции
-   * @constant {Number} Quantity of product in one position
+   * @var {Number} count Quantity of product in one position
    */
-  const count = initialBasketState.length
-    ? initialBasketState.find((el) => el.id === id).quantity
-    : 0;
+  let count = 0;
+
+  /**
+   * @constant {Boolean} isProduct the existence of the product in the basket
+   */
+  const isProduct = basket.basketState.some((el) => el.id === id);
+
+  if (isProduct) {
+    //
+    count = initialBasketState.find((el) => el.id === id).quantity;
+  }
 
   // Hook Отслеживает изменения количества товара одной позиции по клику
   // Hook Tracks changes in the quantity of product of one position per click
@@ -38,13 +52,6 @@ export const BasketItem = (props) => {
   const addCount = () => {
     changeQuantity(id, '+');
     setCount(currentCount + 1);
-  };
-
-  /**
-   * @function removeAllProduct - Function delete all quantity of product
-   */
-  const removeAllProduct = () => {
-    console.log('removeAll');
   };
 
   /**
@@ -86,7 +93,11 @@ export const BasketItem = (props) => {
         </button>
         <button
           className='btn w-2/12 m-2 btn-del btn-del:hover '
-          onClick={removeAllProduct}
+          onClick={() => {
+            // removeAllProductCount(id)
+            handleRemoveProduct(id, basket);
+            // removeProduct(id, basket);
+          }}
         >
           &times;
         </button>

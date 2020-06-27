@@ -58,7 +58,7 @@ export const changeQuantity = (id, sign) => {
    */
   const prevQuantity = indexes.prevQuantity;
   /**
-   * Цена товар уже находящегося в корзине
+   * Цена товара уже находящегося в корзине
    * @constant {number} productPrice Price of the product already in the basket
    */
   const productPrice = findProductById(id, data).price;
@@ -126,34 +126,66 @@ export const addProduct = (id, data) => {
   basket.basketProducts = [...basket.basketProducts];
 };
 
+// NOTE: Имеет ли смысл перенести функцию в компонент Basket?
 /**
  * Функция удаляет товар из корзины в basketProducts.
  * @function removeProduct removes goods from basket in basketProducts
  * @param {string} id - ID удаляемого продукта
  * @param {array} prevBasketProducts - наименования продуктов, которые уже есть в корзине
  */
-export const removeProduct = (id, prevBasketProducts) => {
+export const removeProduct = (id, basket) => {
+  /**
+   * @constant prevBasketProducts Products in the basket
+   */
+  const prevBasketProducts = basket.basketProducts;
   /**
    * Индекс удаляемого продукта.
    * @constant {string} - Index The Removing Product
    */
-  const indx = prevBasketProducts.findIndex((product) => product.id === id);
+  const prevBasketState = basket.basketState;
+  /**
+   * Индекс удаляемого продукта.
+   * @constant {string} - Index The Removing Product in state
+   */
+  const indxProduct = prevBasketProducts.findIndex(
+    (product) => product.id === id
+  );
+  const indxState = prevBasketState.findIndex((product) => product.id === id);
+
+  // * Delete the product from basket
 
   /**
    * Новый список продуктов в корзине.
    * @constant {array} - New product list in the basket
    */
   const newBasketProducts = [
-    ...prevBasketProducts.slice(0, indx),
-    ...prevBasketProducts.slice(indx + 1),
+    ...prevBasketProducts.slice(0, indxProduct),
+    ...prevBasketProducts.slice(indxProduct + 1),
   ];
 
   basket.basketProducts = newBasketProducts;
+
+  // * Delete the product state from basket
+  /**
+   * Новый список состояния продуктов в корзине.
+   * @constant {array} - New product list ыефеу in the basket
+   */
+  const newBasketState = [
+    ...prevBasketState.slice(0, indxState),
+    ...prevBasketState.slice(indxState + 1),
+  ];
+
+  basket.basketState = newBasketState;
+
+  console.log('basket from remove>>>', basket )
+
+  return basket;
 };
 
+// DELETE:
 /**
- * @function deleteAllProduct - Function delete all quantity of product
+ * @function removeAllProductCount delete all quantity of some product
  */
-export const removeAllProduct = (id) => {
-  console.log('deleteAll');
+export const removeAllProductCount = (id) => {
+  console.log('removeAll');
 };

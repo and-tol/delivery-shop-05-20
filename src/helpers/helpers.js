@@ -12,11 +12,11 @@ export const findProductById = (id, data) => {
 };
 
 /**
- * Функция создает объект по индексу с количеством и суммой продукта уже находящегося в корзине.
- * @function helperBasket The function creates an object by index with the quantity and sum of the product already in the basket.
- * @param {String} id - ID продукта в корзине. Product ID in basket
- * @param {Object} basket - объект состояния корзины и перечень продуктов в корзине. basket status object and list of products in the basket
- * @returns {Object} - количество и сумма товара уже находящегося в корзине. quantity and amount
+ * Функция создает объект по индексу с количеством и суммой продукта уже находящегося в корзине для state.
+ * @function helperBasket The function creates an object by index with the quantity and sum of the product already in the basket for state.
+ * @param {String} id - ID продукта в корзине. Product ID in basket in the state
+ * @param {Object} basket - объект состояния корзины и перечень продуктов в корзине. basket status object and list of products in the basket in the state
+ * @returns {Object} - количество и сумма товара уже находящегося в корзине. quantity and amount in the state
  */
 export const helperBasket = (id, basket) => {
   return {
@@ -83,3 +83,17 @@ export const helperBasket = (id, basket) => {
  * @returns {string} String without last five signs
  */
 export const slicer = (x) => x.slice(0, -5);
+
+/**
+ * @function findIndx find index in array with id 
+ * @param {String} id product id
+ * @param {Array} arr product list
+ * @returns {Number} position in array
+ */
+export const findIndex = (id, arr) => {
+  /**
+   * @param {object} el
+   */
+  const indx = arr.findIndex((el) => el.id === id);
+  return indx;
+};

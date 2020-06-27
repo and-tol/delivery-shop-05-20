@@ -1,40 +1,45 @@
 import React, { useState } from 'react';
 import { BasketItem } from './BasketItem/BasketItem';
 import {
-  basket,
-  newBasketState,
+  // basket,
   changeQuantity,
-  // TODO: реализовать вместо incr/decr
+  // removeAllProductCount,
+  removeProduct,
 } from '../../../basket-data/basket-data';
 
 /**
  * Компонент корзины с товарами.
- * Component of the basket of goods
- * @component
+ * @component Component of the basket of goods
  */
-export const Basket = () => {
+export const Basket = (props) => {
+  console.log('props', props);
   /**
    * Список состояния продуктов в корзине в виде массива.
    * @constant basketState List of product status in the basket as an array
    */
-  const basketState = basket.basketState;
+  const basket = props.basket;
+  const basketState = props.basket.basketState;
+  // const removeProduct = props.removeProduct;
+  // const handleRemoveProduct = props.handleRemoveProduct;
 
   /**
    * Функция считает общее количество товара в корзине.
    * @function totalProductsQuantity The function calculates the total quantity of goods in the basket.
    */
   const totalProductsQuantity = () =>
-    basket.basketState.reduce((acc, cur) => acc + cur.quantity, 0);
+    basketState.reduce((acc, cur) => acc + cur.quantity, 0);
 
   // Hook Отслеживает изменения в общем количестве товаров.
   // Hook Track changes in the total quantity of goods
-  const [productsQuantity, setBasket] = useState(totalProductsQuantity());
+  const [productsQuantity, setQuantityProducts] = useState(
+    totalProductsQuantity()
+  );
   /**
    * Функция изменяет общее количество товаров.
    * @function changeTotalQuantity The function changes the total quantity of goods.
    */
   const changeTotalQuantity = () => {
-    setBasket(totalProductsQuantity());
+    setQuantityProducts(totalProductsQuantity());
   };
 
   /**
@@ -43,19 +48,35 @@ export const Basket = () => {
    */
   const totalCost = () => basketState.reduce((acc, cur) => acc + cur.sum, 0);
 
+  // ! -------------
+  // ? переместить в компонет Home
+  // Hook Отслеживает удаление всего количества какого-то одного товара
+  // Hook Monitors the removal of the entire quantity of one product.
+
+  const [newBasket, setNewBasket] = useState(props.basket);
+
+  const handleRemoveProduct = (id, basket) => {
+    setNewBasket(removeProduct(id, props.basket));
+  };
+  // ! -------------
+
+
+
   /**
    * Функция формирует список товаров в корзине.
    * @function renderBasket The function creates a list of goods in the basket
    */
   const renderBasket = () =>
-    basket.basketProducts.map((product) => {
+    newBasket.basketProducts.map((product) => {
       return (
         <BasketItem
           key={product.id}
           item={product}
-          initialBasketState={basket.basketState}
+          basket={newBasket}
           changeTotalQuantity={changeTotalQuantity}
           changeQuantity={changeQuantity}
+          removeProduct={removeProduct}
+          handleRemoveProduct={handleRemoveProduct}
         />
       );
     });
@@ -63,7 +84,11 @@ export const Basket = () => {
   return (
     <div className='flex'>
       <section className='w-2/3 mx-auto p-2 bg-gray-200'>
-        {renderBasket()}
+        {basket.basketProducts.length > 0 ? (
+          renderBasket()
+        ) : (
+          <p>Корзина пуста</p>
+        )}
       </section>
       <section className='w-1/3 p-2'>
         <div className='w-full h-full border border-gray-400 p-4'>
